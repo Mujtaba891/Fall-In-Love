@@ -1,39 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="flowers.png" type="image/x-icon">
-  <title>FALL IN LOVE</title>
+  <title>FAIZAH Welcome Page</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #282c34;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    textarea {
+      width: 80%;
+      height: 100px;
+      padding: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      resize: none;
+      background: #111;
+      color: #fff;
+      font-family: 'Cursive', Arial;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 15px rgba(255, 0, 150, 0.7);
+    }
+
+    .submit-btn {
+      padding: 10px 20px;
+      margin: 20px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #ff007f, #ff77aa);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      text-shadow: 0 0 8px #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 0, 150, 0.8);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #ff007f;
+      transform: rotate(45deg);
+      animation: fly 2s ease-in-out infinite;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: inherit;
+      border-radius: 50%;
+      top: -50%;
+      left: 0;
+    }
+
+    .heart:after {
+      left: auto;
+      right: -50%;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 24px;
+      font-family: 'Cursive', Arial;
+      color: #fff;
+    }
+
+    .option-buttons {
+      margin-top: 20px;
+    }
+
+    .option-buttons a {
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #ff007f, #ff77aa);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      text-shadow: 0 0 8px #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .option-buttons a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 0, 150, 0.8);
+    }
+  </style>
 </head>
-
 <body>
-  <div class="greetings">
-    <!-- silahkan menambah kata sesuai keinginan dengan <span>text...</span -->
-    <span>H</span>
-    <span>I:</span>
-    <span></span>
-    <span>F</span>
-    <span>A</span>
-    <span>I</span>
-    <span>Z</span>
-    <span>A</span>
-    <span>H</span>
+  <div class="container">
+    <textarea id="name-input" placeholder="Enter your name"></textarea>
+    <button class="submit-btn" onclick="validateName()">Submit</button>
+    <div class="message hidden" id="welcome-message">
+      Hello FAIZAH, welcome to the heart of Mujtaba Alam. Do you want to continue?
+      <div class="option-buttons">
+        <a href="home.html">Yes</a>
+        <a href="home.html">No</a>
+      </div>
+    </div>
+    <div class="hearts" id="hearts"></div>
   </div>
-  <div class="description">
-    <span>flowers for you</span>
 
+  <script>
+    function validateName() {
+      const input = document.getElementById('name-input').value.trim().toLowerCase();
+      const allowedNames = ['faizah', 'faiza'];
+      const message = document.getElementById('welcome-message');
 
-  </div>
-  <div class="button">
-    <button>
-      <a href="flower.html">click here :FAIZAH</a>
-    </button>
+      if (allowedNames.includes(input)) {
+        message.classList.remove('hidden');
+        generateHearts();
+      } else {
+        alert('enter a valid name!');
+      }
+    }
 
-  </div>
+    function generateHearts() {
+      const heartsContainer = document.getElementById('hearts');
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        heartsContainer.appendChild(heart);
+        setTimeout(() => heartsContainer.removeChild(heart), 2000);
+      }
+    }
+  </script>
 </body>
-
 </html>
